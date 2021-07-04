@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   data() {
     return {
@@ -32,10 +30,12 @@ export default {
     };
   },
   methods: {
-    submit() {
-      axios.post("http://localhost:3000/messages", {
-        message: this.messageBody,
-      });
+    async submit() {
+      try {
+        this.$store.dispatch("newMessage", this.messageBody);
+      } catch (error) {
+        console.log(error.message);
+      }
     },
   },
 };
